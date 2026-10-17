@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Buildesk ProjectPulse
 
-## Getting Started
+Frontend-only per-project real estate dashboard for Buildesk CRM. Inventory, parking, area, sales, collections, outstanding dues, and construction progress — powered by typed mock data that can be swapped for a real API.
 
-First, run the development server:
+## Stack
+
+- Next.js 14 (App Router) + TypeScript
+- Tailwind CSS + shadcn/ui primitives
+- Recharts, TanStack Query v5, Zustand
+- lucide-react, date-fns
+
+## Setup
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) — redirects to `/projects`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` to `.env.local`:
 
-## Learn More
+```
+NEXT_PUBLIC_USE_MOCK=true
+NEXT_PUBLIC_API_BASE_URL=
+```
 
-To learn more about Next.js, take a look at the following resources:
+- `NEXT_PUBLIC_USE_MOCK=true` — use the local mock service (default).
+- `NEXT_PUBLIC_USE_MOCK=false` — every call goes through `src/lib/api/client.ts` to `NEXT_PUBLIC_API_BASE_URL`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Force a mock failure for error-state testing: append `?fail=1` to any page URL.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
+| Command | Purpose |
+|---|---|
+| `npm run dev` | Dev server |
+| `npm run build` | Production build |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run lint` | ESLint |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## API swap
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Components and hooks only import from `src/lib/api/projectService.ts`. When the backend is ready, set the env vars above. Endpoint path builders live in `src/lib/api/endpoints.ts`.

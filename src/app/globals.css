@@ -1,27 +1,27 @@
+@import 'react-day-picker/dist/style.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  color-scheme: light;
+  --brand: #2563eb;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f7fb;
+  color: #111827;
+  min-height: 100vh;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .scrollbar-thin {
+    scrollbar-width: thin;
   }
 }
