@@ -1,0 +1,19 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: buildesk-projectpulse
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /projects
+    envVars:
+      - key: NODE_VERSION
+        value: '20.18.1'
+      - key: NEXT_TELEMETRY_DISABLED
+        value: '1'
+      - key: NEXT_PUBLIC_USE_MOCK
+        value: 'true'
+      - key: NEXT_PUBLIC_API_BASE_URL
+        sync: false
