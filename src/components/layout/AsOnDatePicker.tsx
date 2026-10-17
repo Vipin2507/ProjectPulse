@@ -28,7 +28,7 @@ export function AsOnDatePicker() {
           <ChevronDown className="h-4 w-4 text-ink-muted" aria-hidden />
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto">
+      <PopoverContent className="w-auto p-0" align="end">
         <Calendar
           mode="single"
           selected={selected}
